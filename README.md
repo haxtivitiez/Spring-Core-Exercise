@@ -1,1 +1,263 @@
 # Spring-Core-Exercise
+
+Why spring 
+- Simplify Java Enterprise Development
+
+Goals of Spring
+- Lightweight + POJO
+- DI
+- AOP
+
+Core Container
+- Beans
+- Core
+- SpEL
+- Context
+
+Infrastructure
+- AOP
+- Aspect
+- Instrumentation
+- Messaging
+
+Data Access Layer
+- JDBC
+- ORM
+- Transaction
+- OXM ---- JMS
+
+
+Web Layer
+- Servlet
+- WebSocket
+- Web
+- Portlet
+
+Test Layer
+- Unit
+- Integration
+- Mock
+
+
+
+
+C:\Program Files\Apache Software Foundation\Tomcat 9.0
+
+
+
+Inversion Of Control
+
+The approach of outsourcing the
+construction and management of object.
+
+
+[Spring IoC]
+
+MyApp --> Object Factory --> CONFIG > Object
+
+
+[Spring Container]
+
+primary function
+
+- Create and manage Objects (IoC)
+- Inject Object's Dependencies (DI)
+
+[Config Spring Container]
+
+3 ways
+- XML
+- Java Annotaions
+- Java Source Code
+
+
+[Spring development Process]
+1.Config Spring Bean
+2.Create Spring Container
+3.Retrieve Bean From Spring Container
+
+
+1.Config Spring beans
+[XML]
+
+2.Create Spring Container
+[ApplicationContext]
+- ClassPathXmlApplicationContext
+- AnnotaionCondfigApplicationContext
+- GenericWebApplicationContext
+- others
+
+
+3.Retrieve Bean From Spring Container
+context.getBean(...,Class.class);
+
+
+
+
+
+
+
+-----------------------------------
+[Dependencies Injection]
+The depency inversion principle.
+
+The client delegate to call another
+object responsibility of providing its
+dependencies
+
+"Dependency same thing as helper object"
+
+
+[Spring Container]
+MyApp--> give me Coach --> Object Factory
+--> config >> BaseBallCoach[Dependency][helper]
+	      HockeyCoach[Dependency][helper]
+	      CricketCoach[Dependency][helper]
+
+-----------------------------------
+
+Demo Example 
+
+Service --> dependency[helper]
+
+
+Injection Type
+
+- Constructor Injection
+- Setter Injection
+
+[Auto-wiring]
+
+
+
+[development Process - Constructor Injection]
+
+1.Define the dependency interface and class
+2.Create a contructor in your class for injection
+3.Configure the dependency in Spring config file
+
+
+[SPRING THE GOD OF BEHIND THE SCENE]
+
+[development Process - Setter Injection]
+
+1.Create a setter method in your class for injection
+2.Configure the dependency in Spring config file
+
+[Inject Literal value]
+
+
+[Inject value from Properties file]
+
+
+1.Create Properties  file
+2.Load Properties in Spring config file
+3.Reference value from Properties  file
+
+
+[Spring Bean Scope]
+- Singleton [Only one instance / Cached in MEM
+  All request for the bean / will return SHARED
+  REFERENCE TO SAME BEAN]
+
+- Prototype [Create new instance per request]
+
+
+[Spring Bean LifeCycle]
+
+Container Start >>
+Bean Instantiated >>
+DI >>
+Internal Spring process >>
+[Your Custom / Init Method] >>>> Bean Ready for use
+---------------------
+Container Shutdown >> [Your Custom / Init Method Destro] >>
+STOP
+
+
+[Bean Init] --> CALL
+[Bean Deconstruct] --> CLEAN
+
+
+
+
+[development Process -Bean LifeCycle]
+1.Define method for Init and Destroy
+2.config the method names in Spring config file
+
+
+[Java Annotation]
+- spring will scan your java class for special annotation
+- Automate register the bean in spring container
+
+
+
+[development Process -Annotation // IoC]
+
+1.Enable component scanning in Spring config file
+2.Add the @Component Annotation to your java class
+3.Retrieve bean from spring container
+
+
+[Autowiring injecion type]
+- Constructor Injection
+- Setter Injection
+- Field Injection
+
+[development Process - Annotation (contructor) // DI]
+
+1.Defind the dependency interface and class
+2.Create a contructor class for inject
+3.Config the dependency injection with @Autowired
+
+Using @Qualifier for fix component to Scan
+
+
+@Qualifier Inject Type
+
+Can appy !@Qualifier annotation to
+1.Constructor
+2.Setter
+3.Field
+
+[BeanScope with Annotation]
+@Scope("prototype")
+
+[Bean Life Cycle Method with Annotation]
+@PostConstruct 
+@PreDestroy
+
+[Spring Configuration with Java Code]
+** NO XML
+
+
+[development Process - Spring Configuration with Java Code]
+
+1.Create a Java class and annotation as @Configuration
+2.Add component scan @ComponentScan (OPTIONAL)
+3.Read Spring Configuration class
+4.Retrieve bean From Spring container
+
+
+
+[Defining bean with Java code]
+
+[development Process - Defining bean with Java code]
+
+1.Define method to expose bean
+2.Inject bean dependencies
+3.Read Spring Java annotation class
+4.Retrieve bean from Spring container
+[@Bean] [No component Scan]
+
+
+[Inject Value from properties file]
+[development Process - Inject Value from properties file]
+
+1.Create Properties file
+
+2.Load Properties in Spring configuration
+[@PropertySource("classpath:sport.properties")]
+
+
+3.Reference Value from properties file
